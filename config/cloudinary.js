@@ -15,7 +15,7 @@ cloudinary.v2.config({
 const uploads = (file, folder) => {
     return new Promise((resolve) => {
         cloudinary.uploader.upload(file, (result) => {
-            console.log(result)
+            // console.log(result)
             resolve({
                 productUrl: result.url,
                 mediaType: result.resource_type,

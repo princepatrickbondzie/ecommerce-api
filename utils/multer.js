@@ -2,21 +2,19 @@ import multer from 'multer';
 import * as fs from 'fs';
 import * as path from 'path';
 
-if (!fs.existsSync("./uploads")) {
-    fs.mkdirSync("./uploads");
-}
+// if (!fs.existsSync("./uploads")) {
+//     fs.mkdirSync("./uploads");
+// }
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './uploads')
-        // cb(null, path.join(__dirname, '/uploads/'));
-    },
+    // destination: (req, file, cb) => {
+    //     cb(null, './uploads')
+    //     // cb(null, path.join(__dirname, '/uploads/'));
+    // },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + ' - ' + file.originalname)
     }
 });
-
-// const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
     if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png') {
