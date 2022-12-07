@@ -1,6 +1,7 @@
 import { SuccessResponse } from "../../core/ApiResponse.js";
 import asyncHandler from "../../middlewares/asyncHandler.js";
 import Address from '../../models/Address.js';
+import User from "../../models/User.js";
 
 const createAddress = asyncHandler(async (req, res) => {
     const address = await Address.create({
@@ -13,9 +14,9 @@ const createAddress = asyncHandler(async (req, res) => {
         city: req.body.city,
         region: req.body.region,
     });
-
+    
     req.user.address.push(address._id);
-    User.updateOne({ _id: req.user._id }, { $set: { ...req.user } }).lean().exec();
+    await User.updateOne({ _id: req.user._id }, { $set: { ...req.user } }).lean().exec();
 
     res.status(200).json({
         message: "Address added",

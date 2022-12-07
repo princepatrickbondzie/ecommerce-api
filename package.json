@@ -21,5 +21,9 @@
     "path": "^0.12.7",
     "util": "^0.12.5"
   },
+  "scripts": {
+    "build": "build",
+    "prod": "serve -s build"
+  },
   "type": "module"
 }

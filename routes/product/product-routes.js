@@ -13,8 +13,8 @@ const router = express.Router();
 router.get('/all', validator(schema.pagination, ValidationSource.QUERY), getAllProducts);
 router.get('/:id', validator(schema.productId, ValidationSource.PARAM), getProductById);
 router.get('/category/:id', validator(schema.categoryId, ValidationSource.PARAM), validator(schema.pagination, ValidationSource.QUERY), getProductsByCategory);
-router.get('/seller/:id', authentication, validator(schema.sellerId, ValidationSource.PARAM), validator(schema.pagination, ValidationSource.QUERY), getProductsBySeller);
-router.post('/', authentication, role(RoleCode.SELLER || RoleCode.SUPER_ADMIN || RoleCode.ADMIN), authorization, validator(schema.product), createProduct);
-router.patch('/:id', authentication, role(RoleCode.SELLER || RoleCode.SUPER_ADMIN || RoleCode.ADMIN), validator(schema.productId, ValidationSource.PARAM), updateProduct);
+router.get('/seller/:id', authentication, validator(schema.sellerId, ValidationSource.PARAM), role(RoleCode.SELLER || RoleCode.SUPER_ADMIN || RoleCode.ADMIN), validator(schema.pagination, ValidationSource.QUERY), getProductsBySeller);
+router.post('/create', authentication, role(RoleCode.SELLER || RoleCode.SUPER_ADMIN || RoleCode.ADMIN), authorization, validator(schema.product), createProduct);
+router.patch('/:id', authentication, validator(schema.productId, ValidationSource.PARAM), role(RoleCode.SELLER || RoleCode.SUPER_ADMIN || RoleCode.ADMIN), updateProduct);
 
 export default router;

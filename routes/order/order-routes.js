@@ -11,6 +11,6 @@ const router = express.Router();
 router.get("/all", authentication, validator(schema.orderId, ValidationSource.PARAM), role(RoleCode.CUSTOMER_SERVICE || RoleCode.SUPER_ADMIN, RoleCode.ADMIN), getAllOrders);
 router.get("/:id", authentication, validator(schema.orderId, ValidationSource.PARAM), role(RoleCode.CUSTOMER_SERVICE || RoleCode.SUPER_ADMIN, RoleCode.ADMIN), getOrderById);
 router.get("/:id", authentication, validator(schema.sellerId, ValidationSource.PARAM), role(RoleCode.CUSTOMER_SERVICE || RoleCode.SUPER_ADMIN, RoleCode.ADMIN || RoleCode.SELLER), getOrdersBySeller);
-router.post("/create", authentication, validator(schema.order, ValidationSource.BODY), createOrder);
+router.post("/create", authentication, role(RoleCode.USER || RoleCode.SELLER), validator(schema.order, ValidationSource.BODY), createOrder);
 
 export default router;
